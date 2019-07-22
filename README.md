@@ -20,7 +20,7 @@ GOC is a C++ library that comes with classes and functions to ease the process o
   - epsilon-comparison functions (to see if two values are near given a certain precision).
 - String util functions
   - contains, split, trim, ...
-  - STR(obj) macro which converts any object to a string using the <<operator()
+  - STR(obj) macro which converts any object to a string using the \<\<operator()
 - Time handling functions and classes
   - Date, Duration, PointInTime.
   - Stopwatch, Watch, Timer.
@@ -45,7 +45,7 @@ The following instructions will guide you through the steps to have GOC compiled
 
 > Note: the environment variables can be added permanently by adding those lines to the /etc/environment file.
 
-> Note: CPLEX usually has its root at _/opt/ibm/ILOG/CPLEX_Studio<version>/cplex/_.
+> Note: CPLEX usually has its root at _/opt/ibm/ILOG/CPLEX_Studio\<version\>/cplex/_.
 
 ### Including GOC in your project (using CMake).
 1. Add a _lib/goc/_ directory to your project.
