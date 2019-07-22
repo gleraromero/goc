@@ -1,5 +1,5 @@
 # GOC
-A (Runner-Kaleidoscope compatible) CPP framework for Combinatorial Optimization research.
+A (Runner-Kaleidoscope compatible) C++ framework for Combinatorial Optimization research.
 
 ## Description
 Some common tasks are done in many algorithms for solving Combinatorial Optimization problems. Generally, Mixed Integer Linear Programming _(MILP)_ is used to deal with such cases. Dealing with MILP solvers some times is not a straightforward task, and it can add some noise to the actual code that is needed to solve the problem.
