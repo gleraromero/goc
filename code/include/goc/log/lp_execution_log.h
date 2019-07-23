@@ -18,15 +18,6 @@
 
 namespace goc
 {
-// All the log options that can be enabled/disabled.
-// - ScreenOutput: 	if not included, the output will not be stored.
-//					advantage: saving space.
-// - Duals: 		if not included {duals} will not be filled.
-//					advantage: if model has many constraints, getting them is linear in that size.
-// - Incumbent:		if not included {incumbent} will not be filled.
-//					advantage: if solution has many variables, getting it is linear in that size.
-enum class LPOption { ScreenOutput, Duals, Incumbent };
-
 // All the status that can result from a simplex execution.
 enum class LPStatus { DidNotStart, Infeasible, Unbounded, TimeLimitReached, MemoryLimitReached, Optimum };
 

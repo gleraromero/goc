@@ -18,10 +18,6 @@
 
 namespace goc
 {
-// All the log options that can be enabled/disabled.
-// - ScreenOutput: 		if not included, the output will not be stored.
-//						advantage: saving space.
-enum class MLBOption { ScreenOutput };
 // All the status that can result from a monodirectional labeling algorithm.
 enum class MLBStatus { DidNotStart, TimeLimitReached, ProcessLimitReached, Finished };
 

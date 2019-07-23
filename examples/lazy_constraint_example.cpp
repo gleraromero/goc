@@ -56,7 +56,7 @@ public:
 			// Break it using \sum_{i \in S} \sum_{j \in T} x[i][j] >= 1.0.
 			if (epsilon_smaller(F, 0.9))
 			{
-				violated.push_back(FSUM(i:ST.S, FSUM(j:ST.T, x.at({i,j}))).GEQ(2.0));
+				violated.push_back(ESUM(i:ST.S, ESUM(j:ST.T, x.at({i,j}))).GEQ(2.0));
 				break;
 			}
 		}
@@ -88,8 +88,8 @@ int main()
 	for (Edge e: E) x[e] = f->AddVariable("x_" + STR(E), VariableDomain::Binary, 0.0, 1.0);
 
 	SubtourEliminationConstraint sec(G, x); // Subtour elimination constraint separation routine.
-	f->Minimize(FSUM(e:E, d[e.tail][e.head] * x[e])); // Objective function.
-	for (int i: V) f->AddConstraint(FSUM(e:G.IncidentEdges(i), x[e]).EQ(2.0)); // degree constraints.
+	f->Minimize(ESUM(e:E, d[e.tail][e.head] * x[e])); // Objective function.
+	for (int i: V) f->AddConstraint(ESUM(e:G.IncidentEdges(i), x[e]).EQ(2.0)); // degree constraints.
 	f->AddLazyConstraint(&sec); // Adding SEC as lazy constraint.
 	
 	clog << "Formulation:" << endl;

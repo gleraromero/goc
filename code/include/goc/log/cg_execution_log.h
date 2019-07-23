@@ -19,13 +19,6 @@
 
 namespace goc
 {
-// All the log options that can be enabled/disabled.
-// - IterationsInformation: if not included, {iterations} will not be stored.
-//							advantage: saving the space of the iteration logs.
-// - ScreenOutput: 			if not included, the output will not be stored.
-//							advantage: saving space.
-enum class CGOption { IterationsInformation, ScreenOutput };
-
 // All the status that can result from a column generation execution.
 enum class CGStatus { DidNotStart, Infeasible, Unbounded, TimeLimitReached, MemoryLimitReached, Optimum };
 

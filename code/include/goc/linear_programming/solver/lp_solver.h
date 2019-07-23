@@ -16,22 +16,28 @@
 #include "goc/log/lp_execution_log.h"
 #include "goc/time/duration.h"
 
-namespace nlh = nlohmann;
-
 namespace goc
 {
+// All the log options that can be enabled/disabled.
+// - ScreenOutput: 	if not included, the output will not be stored.
+//					advantage: saving space.
+// - Duals: 		if not included {duals} will not be filled.
+//					advantage: if model has many constraints, getting them is linear in that size.
+// - Incumbent:		if not included {incumbent} will not be filled.
+//					advantage: if solution has many variables, getting it is linear in that size.
+enum class LPOption { ScreenOutput, Duals, Incumbent };
+
 // Class representing a solver for the lp relaxation. Its purpose is to abstract the
 // specific solver implementations from the algorithms.
-// The solver has the following parameters:
-//	screen_output: pointer to the stream where the output of the algorithm should go. (nullptr for no output).
-//	time_limit: maximum time to spend solving the colgen.
-//	config: json object with the configuration options to send to the solver. Example: {"CPX_PARAM_REDUCE": 0, ...}.
 class LPSolver
 {
 public:
+	// Pointer to the stream where the output of the algorithm should go. (nullptr for no output).
 	std::ostream* screen_output;
+	// maximum time to spend solving.
 	Duration time_limit;
-	nlh::json config;
+	// json object with the configuration options to send to the solver.
+	nlohmann::json config;
 	
 	// Creates a default lp solver. (time limit: 2 hours).
 	// Currently: CPLEX.

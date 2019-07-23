@@ -9,7 +9,8 @@
 
 namespace goc
 {
-// Represents an object that may have a value or not. It is a more declarative way to do this instead of nullptr.
+// Represents an object that may have a value assigned or not. It is a more declarative and safe way to do this
+// instead of nullptr.
 template<typename T>
 class Maybe
 {
@@ -21,31 +22,39 @@ public:
 		value_ = nullptr;
 	}
 	
+	// Creates a Maybe object set to the value.
 	Maybe(const T& value)
 		: Maybe(value, true)
 	{
 	
 	}
 	
-	// Creates an object with the underlying value and which may or not be set.
-	Maybe(const T& value, bool is_set)
+	// Creates a copy of m.
+	Maybe(const Maybe<T>& m)
 	{
-		value_ = new T(value);
-		is_set_ = is_set;
+		is_set_ = m.is_set_;
+		if (is_set_) value_ = new T(*(m.value_));
 	}
 	
 	~Maybe()
 	{
-		if (value_) delete value_;
+		if (is_set_) delete value_;
 	}
 	
-	operator T&()
+	// Assigns the value to the maybe.
+	// Returns: a reference to the just assigned value.
+	Maybe<T>& operator=(const Maybe<T>& maybe)
 	{
-		return *value_;
+		is_set_ = maybe.is_set_;
+		Set(maybe.Value());
+		return *this;
 	}
 	
-	operator T() const
+	// Assigns the value to the maybe.
+	// Returns: a reference to the just assigned value.
+	T& operator=(const T& value)
 	{
+		Set(value);
 		return *value_;
 	}
 	
@@ -69,6 +78,34 @@ public:
 		is_set_ = true;
 	}
 	
+	// Returns: the value.
+	// Precondition: IsSet() == true.
+	const T& Value() const
+	{
+		return *value_;
+	}
+	
+	// Returns: the value.
+	// Precondition: IsSet() == true.
+	T& Value()
+	{
+		return *value_;
+	}
+	
+	// Returns: a reference to the value.
+	// Precondition: IsSet().
+	operator T&()
+	{
+		return *value_;
+	}
+	
+	// Returns: a copy of the value.
+	// Precondition: IsSet().
+	operator T() const
+	{
+		return *value_;
+	}
+	
 	// Returns: a pointer to the value.
 	// Precondition: IsSet().
 	T* operator->()
@@ -84,49 +121,28 @@ public:
 	}
 	
 	// Returns: a reference to the value.
+	// Precondition: IsSet().
 	T& operator*()
 	{
 		return *value_;
 	}
 	
 	// Returns: a reference to the value.
+	// Precondition: IsSet().
 	const T& operator*() const
 	{
 		return *value_;
 	}
 	
-	// Returns: the value.
-	// Precondition: IsSet() == true.
-	const T& Value() const
-	{
-		return *value_;
-	}
-	
-	// Returns: the value.
-	// Precondition: IsSet() == true.
-	T& Value()
-	{
-		return *value_;
-	}
-	
-	// Assigns the value to the maybe.
-	// Returns: a reference to the just assigned value.
-	T& operator=(const T& value)
-	{
-		Set(value);
-		return *value_;
-	}
-	
-	// Assigns the value to the maybe.
-	// Returns: a reference to the just assigned value.
-	Maybe<T>& operator=(const Maybe<T>& maybe)
-	{
-		is_set_ = maybe.is_set_;
-		Set(maybe.Value());
-		return *this;
-	}
-	
 private:
+	
+	// Creates an object with the underlying value and which may or not be set.
+	Maybe(const T& value, bool is_set)
+	{
+		value_ = new T(value);
+		is_set_ = is_set;
+	}
+	
 	bool is_set_ = false;
 	T* value_;
 };

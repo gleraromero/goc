@@ -29,13 +29,7 @@
 #include "goc/json/json_utils.h"
 
 #include "goc/lib/json.hpp"
-#include "goc/lib/catch.hpp"
 
-#include "goc/linear_programming/colgen/colgen.h"
-#include "goc/linear_programming/cplex/cplex_formulation.h"
-#include "goc/linear_programming/cplex/cplex_solver.h"
-#include "goc/linear_programming/cplex/cplex_wrapper.h"
-#include "goc/linear_programming/cuts/separation_algorithm.h"
 #include "goc/linear_programming/cuts/separation_routine.h"
 #include "goc/linear_programming/cuts/separation_strategy.h"
 #include "goc/linear_programming/model/branch_priority.h"
@@ -44,7 +38,6 @@
 #include "goc/linear_programming/model/formulation.h"
 #include "goc/linear_programming/model/valuation.h"
 #include "goc/linear_programming/model/variable.h"
-#include "goc/linear_programming/model/variable_set.h"
 #include "goc/linear_programming/solver/bc_solver.h"
 #include "goc/linear_programming/solver/cg_solver.h"
 #include "goc/linear_programming/solver/lp_solver.h"

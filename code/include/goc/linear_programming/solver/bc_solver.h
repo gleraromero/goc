@@ -21,24 +21,37 @@
 
 namespace goc
 {
+// All the log options that can be enabled/disabled.
+// - ScreenOutput: 		if not included, the output will not be stored.
+//						advantage: saving space.
+// - RootInformation: 	if not included {root_lp_value, root_int_value, root_int_solution} will not be filled.
+//						advantage: is that no callbacks need to be set to retrieve this information.
+// - BestIntSolution:	if not included {best_int_solution} will not be filled.
+//						advantage: if solution has many variables, getting it is linear in that size.
+// - CutInformation: 	if not included {cut_count, cut_iteration_count, cut_time, cut_families, cut_family_cut_count,
+//						cut_family_iteration_count, cut_family_cut_time} will not be filled.
+//						advantage: saving space.
+enum class BCOption {
+	ScreenOutput, RootInformation, BestIntSolution, CutInformation
+};
+
 // Class representing a solver for branch and cut. Its purpose is to abstract the
 // specific solver implementations from the algorithms.
-// The solver has the following parameters:
-//	screen_output: pointer to the stream where the output of the algorithm should go. (nullptr for no output).
-//	time_limit: maximum time to spend solving the colgen.
-//	config: json object with the configuration options to send to the solver. Example: {"CPX_PARAM_REDUCE": 0, ...}.
-// 	separation_strategy: object that indicates what families of cuts will be added and the strategy to do so.
-//	initial_solutions: a set of initial solutions for the BC.
-//	branch_priorities: 	each variable might receive a number containing the priority on how important is to branch on
-//						that variable. The higher the priority the earliest the variable will be selected to be branched.
 class BCSolver
 {
 public:
+	// Pointer to the stream where the output of the algorithm should go. (nullptr for no output).
 	std::ostream* screen_output;
+	// Maximum time to spend solving.
 	Duration time_limit;
+	// Json object with the configuration options to send to the solver.
 	nlohmann::json config;
+	// Object that indicates what families of cuts will be added and the strategy to do so.
 	SeparationStrategy separation_strategy;
+	// A set of initial solutions for the BC.
 	std::vector<Valuation> initial_solutions;
+	// Each variable might receive a number containing the priority on how important is to branch on
+	// that variable. The higher the priority the earliest the variable will be selected to be branched
 	std::vector<BranchPriority> branch_priorities;
 	
 	// Creates a default branch and cut solver. (time limit: 2 hours).

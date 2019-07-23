@@ -13,6 +13,15 @@ using namespace nlohmann;
 
 namespace goc
 {
+Digraph Digraph::Complete(int n)
+{
+	Digraph D(n);
+	for (int i: range(0, n))
+		for (int j: range(i+1,n))
+			D.AddArc({i,j});
+	return D;
+}
+
 Digraph::Digraph(int vertex_count)
 {
 	vertices_ = range(0, vertex_count);
@@ -33,6 +42,11 @@ Digraph& Digraph::AddArc(Arc e)
 	successor_list_[e.tail].push_back(e.head);
 	predecessor_list_[e.head].push_back(e.tail);
 	return *this;
+}
+
+Digraph& Digraph::AddArcs(const std::vector<Arc>& arcs)
+{
+	for (Arc e: arcs) AddArc(e);
 }
 
 Digraph& Digraph::RemoveArc(Arc e)

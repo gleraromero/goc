@@ -87,8 +87,8 @@ int main()
 		for (int j: C)
 			x[v][j] = f->AddVariable("x_" + STR(v) + "_" + STR(j));
 				
-	f->Minimize(FSUM(j:C, y[j])); // (0)
-	for (int v: V) f->AddConstraint(FSUM(j:C, x[v][j]).EQ(1.0)); // (1)
+	f->Minimize(ESUM(j:C, y[j])); // (0)
+	for (int v: V) f->AddConstraint(ESUM(j:C, x[v][j]).EQ(1.0)); // (1)
 	for (Edge e: E) for (int j: C) f->AddConstraint((1.0*x[e.tail][j]+1.0*x[e.head][j]).LEQ(1.0*y[j])); // (1)
 	for (int v: V) for (int j: C) f->SetVariableBound(x[v][j], 0.0, 1.0);
 	for (int v: V) for (int j: C) f->SetVariableDomain(x[v][j], VariableDomain::Binary);

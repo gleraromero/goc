@@ -19,6 +19,7 @@ namespace goc
 // Invariant: 	it is semi-normalized, meaning that the left side is always with variables and scalar 0, and the right
 //				side is always with variable coefficients 0 and the corresponding scalar.
 //				Example: 2x + 5 <= 3y is not normalized. 2x - 3y <= -5 is normalized.
+//				Constraints are created with class Expression LEQ, GEQ, and EQ methods.
 class Constraint : public Printable
 {
 public:

@@ -23,7 +23,7 @@ namespace goc
 class LinearFunction : public Printable
 {
 public:
-	goc::Interval domain, image;
+	Interval domain, image;
 	double slope, intercept;
 	
 	LinearFunction() = default;

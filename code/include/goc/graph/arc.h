@@ -16,21 +16,22 @@
 namespace goc
 {
 // Represents a directed arc in a digraph.
-// (i, j) has a tail == i, head == j.
+// - (i, j) has a tail = i, head = j.
 class Arc : public Printable
 {
 public:
 	Vertex tail, head;
 	
+	// Creates an arc (tail, head).
 	Arc(Vertex tail, Vertex head);
 	
 	// Returns: if node \in {tail, head}.
 	bool IsIncident(Vertex node) const;
 	
-	// Returns: if tail(this) == head(arc).
+	// Returns: if head(this) == tail(arc).
 	bool IsPredecessorOf(const Arc& arc) const;
 	
-	// Returns: if head(this) == tail(arc).
+	// Returns: if tail(this) == head(arc).
 	bool IsSuccessorOf(const Arc& arc) const;
 	
 	// Returns: an arc (head, tail).

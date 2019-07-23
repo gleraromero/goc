@@ -18,14 +18,16 @@
 
 namespace goc
 {
-// Precondition: Nodes should be numbered from 0 to N-1.
-// Represents an undirected graph.
+// This class represents a (simple, undirected) Graph.
+// - The set of vertices is numbered from 0 to n.
+// - Edges can be added and removed from the Graph dynamically.
 class Graph : public Printable
 {
 public:
 	// Creates a complete graph with n vertices.
 	static Graph Complete(int n);
 	
+	// Creates a no-vertex graph.
 	Graph() = default;
 	
 	// Creates a graph with 'vertex_count' vertices.
@@ -75,9 +77,9 @@ private:
 	std::vector<std::vector<Edge>> incident_edges_; // incident_edges_[i] = {(i, j) \in E(G) }.
 };
 
-void from_json(const nlohmann::json& j, Graph& instance);
+void from_json(const nlohmann::json& j, Graph& G);
 
-void to_json(nlohmann::json& j, const Graph& D);
+void to_json(nlohmann::json& j, const Graph& G);
 } // namespace goc
 
 #endif //GOC_GRAPH_GRAPH_H

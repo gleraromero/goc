@@ -6,6 +6,7 @@
 
 #include "goc/linear_programming/solver/cg_solver.h"
 
+#include "goc/linear_programming/colgen/colgen.h"
 #include "goc/linear_programming/cplex/cplex_formulation.h"
 #include "goc/linear_programming/cplex/cplex_solver.h"
 #include "goc/time/duration.h"

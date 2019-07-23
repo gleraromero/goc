@@ -20,26 +20,13 @@
 
 namespace goc
 {
-// All the log options that can be enabled/disabled.
-// - ScreenOutput: 		if not included, the output will not be stored.
-//						advantage: saving space.
-// - RootInformation: 	if not included {root_lp_value, root_int_value, root_int_solution} will not be filled.
-//						advantage: is that no callbacks need to be set to retrieve this information.
-// - BestIntSolution:	if not included {best_int_solution} will not be filled.
-//						advantage: if solution has many variables, getting it is linear in that size.
-// - CutInformation: 	if not included {cut_count, cut_iteration_count, cut_time, cut_families, cut_family_cut_count,
-//						cut_family_iteration_count, cut_family_cut_time} will not be filled.
-//						advantage: saving space.
-enum class BCOption {
-	ScreenOutput, RootInformation, BestIntSolution, CutInformation
-};
 // All the status that can result from a branch and cut execution.
 enum class BCStatus {
 	DidNotStart, Infeasible, Unbounded, TimeLimitReached, MemoryLimitReached, Optimum, NodeLimitReached
 };
 
 // This class stores information about the execution of a branch-and-cut solver.
-// It is compatible with the Kaleidoscope kd_type "bc".
+// - It is JSON serializable and compatible with the Kaleidoscope kd_type "bc".
 class BCExecutionLog : public Log
 {
 public:

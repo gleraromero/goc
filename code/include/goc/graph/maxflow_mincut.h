@@ -23,12 +23,12 @@ struct STCut
 
 // Solves a maxflow problem on the network D with capacities c with source s and sink t.
 // Parameters:
-// D: digraph represented as list of successors (D[i] = {j \in \delta^+(i)}).
-// x: function that gives the capacities c(i,j) of each arc ij.
+// D: digraph representing the network.
+// c: function that gives the capacities c(i,j) of each arc ij.
 // s: source vertex.
 // t: sink vertex.
 // Returns (max_flow, min_cut) of the network.
-std::pair<double, STCut> maxflow_mincut(const Digraph& D, const std::function<double(int i, int j)>& c, int s, int t);
+std::pair<double, STCut> maxflow_mincut(const Digraph& D, const std::function<double(Vertex i, Vertex j)>& c, int s, int t);
 } // namespace goc.
 
 #endif //GOC_GRAPH_MAXFLOW_MINCUT_H

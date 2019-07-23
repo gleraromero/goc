@@ -17,7 +17,7 @@ namespace goc
 // Represents a path in a graph or digraph.
 typedef std::vector<Vertex> GraphPath;
 
-// Returns: if the path 'p' contains a cycle of size 'max_size' or less.
+// Returns: if the path 'p' contains a cycle of size 'max_size' vertices or less.
 bool has_cycle(GraphPath p, int max_size=INT_MAX);
 } // namespace goc
 

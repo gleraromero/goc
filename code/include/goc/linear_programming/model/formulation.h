@@ -24,9 +24,6 @@ namespace goc
 // Represents the domain of the variables in a (mixed integer) linear programming model.
 enum class VariableDomain { Real, Integer, Binary };
 
-#define FSUM(iter_range, exp) ([&] () { goc::Expression fsum__exp; for (auto& iter_range) { fsum__exp += (exp); } return fsum__exp; })()
-#define FST1(formulation, constraint, iter_range) ([&] () { for (auto& iter_range) { formulation->AddConstraint(constraint); } })()
-
 // Represents a (mixed integer) linear programming model.
 // It is a protocol designed to abstract specific implementations for solvers (CPLEX, Gurobi, etc).
 class Formulation : public Printable

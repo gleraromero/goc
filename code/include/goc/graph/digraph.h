@@ -18,11 +18,16 @@
 
 namespace goc
 {
-// Precondition: Nodes should be numbered from 0 to N-1.
-// Represents a directed graph.
+// This class represents a (simple, directed) Graph.
+// - The set of vertices is numbered from 0 to n.
+// - Arcs can be added and removed from the Digraph dynamically.
 class Digraph : public Printable
 {
 public:
+	// Creates a complete digraph with n vertices.
+	static Digraph Complete(int n);
+	
+	// Creates a no-vertex digraph.
 	Digraph() = default;
 	
 	// Creates a digraph with 'vertex_count' vertices.
@@ -31,6 +36,10 @@ public:
 	// Adds arc e to the digraph.
 	// Returns: a reference to this digraph to concatenate calls.
 	Digraph& AddArc(Arc e);
+	
+	// Adds arcs e to the digraph.
+	// Returns: a reference to this digraph to concatenate calls.
+	Digraph& AddArcs(const std::vector<Arc>& arcs);
 	
 	// Removes arc e from the digraph.
 	// Returns: a reference to this digraph to concatenate calls.
@@ -79,7 +88,7 @@ private:
 	std::vector<std::vector<Arc>> outbound_arcs_; // outbound_arcs[i] = {(i, j) \in A(D) }.
 };
 
-void from_json(const nlohmann::json& j, Digraph& instance);
+void from_json(const nlohmann::json& j, Digraph& D);
 
 void to_json(nlohmann::json& j, const Digraph& D);
 } // namespace goc

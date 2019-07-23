@@ -15,6 +15,8 @@
 #include "goc/linear_programming/model/variable.h"
 #include "goc/print/printable.h"
 
+#define ESUM(iter_range, exp) ([&] () { goc::Expression fsum__exp; for (auto& iter_range) { fsum__exp += (exp); } return fsum__exp; })()
+
 namespace goc
 {
 class Constraint;

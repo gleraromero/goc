@@ -16,13 +16,14 @@
 namespace goc
 {
 // Represents an undirected edge in a graph.
-// (i, j) has a tail and a head.
-// Invariant: i <= j.
+// - (i, j) has a tail = i and a head = j.
+// - Invariant: i <= j.
 class Edge : public Printable
 {
 public:
 	Vertex tail, head;
 	
+	// Creates an edge (tail, head).
 	Edge(Vertex tail, Vertex head);
 	
 	// Returns: if node \in {tail, head}.

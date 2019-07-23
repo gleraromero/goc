@@ -78,30 +78,34 @@ void to_json(json& j, const SeparationStrategy& s)
 		for (auto& dependency: s.Dependencies(family))
 		{
 			if (j["dependencies"] != "") j["dependencies"] += ",";
-			j["dependencies"] += family + "<" + dependency;
+			j["dependencies"] += dependency + "<" + family;
 		}
 	}
 	j["cut_limit"] = "";
 	for (auto& family: s.Families())
 	{
+		if (s.cut_limit.at(family) == INT_MAX) continue;
 		if (j["cut_limit"] != "") j["cut_limit"] += ",";
 		j["cut_limit"] += family + ":" + STR(s.cut_limit.at(family));
 	}
 	j["iteration_limit"] = "";
 	for (auto& family: s.Families())
 	{
+		if (s.iteration_limit.at(family) == INT_MAX) continue;
 		if (j["iteration_limit"] != "") j["iteration_limit"] += ",";
 		j["iteration_limit"] += family + ":" + STR(s.iteration_limit.at(family));
 	}
 	j["cuts_per_iteration"] = "";
 	for (auto& family: s.Families())
 	{
+		if (s.cuts_per_iteration.at(family) == INT_MAX) continue;
 		if (j["cuts_per_iteration"] != "") j["cuts_per_iteration"] += ",";
 		j["cuts_per_iteration"] += family + ":" + STR(s.cuts_per_iteration.at(family));
 	}
 	j["node_limit"] = "";
 	for (auto& family: s.Families())
 	{
+		if (s.node_limit.at(family) == INT_MAX) continue;
 		if (j["node_limit"] != "") j["node_limit"] += ",";
 		j["node_limit"] += family + ":" + STR(s.node_limit.at(family));
 	}
@@ -211,7 +215,7 @@ void from_json(const json& j, SeparationStrategy& s)
 			string f1 = trim(splitted_dependency[0]);
 			string f2 = trim(splitted_dependency[1]);
 			
-			s.AddDependency(f1, f2);
+			s.AddDependency(f2, f1);
 		}
 	}
 }

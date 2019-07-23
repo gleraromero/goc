@@ -32,7 +32,7 @@ BCExecutionLog maximum_weight_independent_set(const Graph& G, const vector<doubl
 	Formulation* f = BCSolver::NewFormulation();
 	vector<Variable> x;
 	for (int i = 0; i < G.VertexCount(); ++i) x.push_back(f->AddVariable("x_" + STR(i), VariableDomain::Binary, 0.0, 1.0));
-	f->Maximize(FSUM(i:G.Vertices(), w[i] * x[i]));
+	f->Maximize(ESUM(i:G.Vertices(), w[i] * x[i]));
 	for (Edge e: G.Edges()) f->AddConstraint((x[e.tail] + x[e.head]).LEQ(1.0));
 	
 	// Solve with a BC solver.

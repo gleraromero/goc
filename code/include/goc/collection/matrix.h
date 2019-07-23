@@ -22,59 +22,71 @@ template<typename T>
 class Matrix : public Printable
 {
 public:
+	// Creates an empty matrix.
 	Matrix(int row_count=0, int col_count=0)
 		: matrix_(row_count, std::vector<T>(col_count)), row_count_(row_count), col_count_(col_count)
 	{ }
 	
+	// Creates a matrix with row_count rows, col_count columns, and all cells with the default_element.
 	Matrix(int row_count, int col_count, const T& default_element)
 		: matrix_(row_count, std::vector<T>(col_count, default_element)), row_count_(row_count), col_count_(col_count)
 	{ }
 	
+	// Returns: the number of rows.
 	int row_count() const
 	{
 		return row_count_;
 	}
 	
+	// Returns: the number of columns.
 	int column_count() const
 	{
 		return col_count_;
 	}
 	
+	// Returns: the number of cells.
 	int size() const
 	{
 		return row_count_ * col_count_;
 	}
 	
+	// Returns: the specified row.
 	std::vector<T>& operator[](int row)
 	{
 		return matrix_[row];
 	}
 	
+	// Returns: the specified row.
 	const std::vector<T>& operator[](int row) const
 	{
 		return matrix_[row];
 	}
 	
+	// Returns: the specified cell value.
 	T& operator()(int row, int col)
 	{
 		return matrix_[row][col];
 	}
 	
+	// Returns: the specified cell value.
 	const T& operator()(int row, int col) const
 	{
 		return matrix_[row][col];
 	}
 	
+	// Returns: the specified cell value.
 	const T& at(int row, int col) const
 	{
 		return matrix_.at(row).at(col);
 	}
 	
+	// Clears the content of the matrix by setting the default value of T to each cell.
 	void clear()
 	{
 		matrix_ = std::vector<std::vector<T>>(row_count_, std::vector<T>(col_count_));
 	}
 	
+	// Prints the matrix.
 	virtual void Print(std::ostream& os) const
 	{
 		os << matrix_;

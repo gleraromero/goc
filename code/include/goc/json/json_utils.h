@@ -13,8 +13,10 @@
 
 namespace goc
 {
+// Returns: if the object has the specified key defined.
 bool has_key(const nlohmann::json& object, const std::string& key);
 
+// Returns: The object value for the key if it is defined, otherwise returns def.
 const nlohmann::json& value_or_default(const nlohmann::json& object, const std::string& key, const nlohmann::json& def);
 } // namespace goc
 

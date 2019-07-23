@@ -17,11 +17,14 @@
 namespace goc
 {
 // A valuation is an assignment of values to variables.
-// Invariant: all values stored must not be zero.
-// Observation: if a variable is not present in the valuation its value is 0.
+// - Invariant: all values stored must not be zero.
+// - Observation: if a variable is not present in the valuation its value is 0.
 class Valuation : public Printable
 {
 public:
+	// Creates a valuation with all values equal to 0.
+	Valuation() = default;
+	
 	// Sets the value of the varaible v.
 	void SetValue(const Variable& v, double value);
 	

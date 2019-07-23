@@ -14,12 +14,11 @@
 
 #include "goc/linear_programming/model/formulation.h"
 #include "goc/linear_programming/solver/lp_solver.h"
+#include "goc/linear_programming/solver/cg_solver.h"
 #include "goc/log/cg_execution_log.h"
 
 namespace goc
 {
-typedef std::function<void(const std::vector<double>& duals, double incumbent_value, Duration time_limit, CGExecutionLog* execution_log)> PricingFunction;
-
 // formulation: Master problem formulation.
 // screen_output: Stream where the output to screen should be sent.
 // time_limit: Maximum time that might be spent on this method.

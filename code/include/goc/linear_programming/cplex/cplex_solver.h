@@ -14,6 +14,8 @@
 #include "goc/linear_programming/cplex/cplex_formulation.h"
 #include "goc/linear_programming/cuts/separation_strategy.h"
 #include "goc/linear_programming/model/branch_priority.h"
+#include "goc/linear_programming/solver/lp_solver.h"
+#include "goc/linear_programming/solver/bc_solver.h"
 #include "goc/log/bc_execution_log.h"
 #include "goc/log/lp_execution_log.h"
 
