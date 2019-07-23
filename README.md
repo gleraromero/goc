@@ -29,9 +29,9 @@ GOC is a C++ library that comes with classes and functions to ease the process o
 The following instructions will guide you through the steps to have GOC compiled and ready to use.
 
 ### Prerequisites
-- CPLEX >12.8 [(more info)](https://www.ibm.com/products/ilog-cplex-optimization-studio)
-- Boost Graph Library >1.66 [(more info)](https://www.boost.org/doc/libs/1_66_0/libs/graph/doc/index.html)
-- CMake >2.8.4 [(more info)](https://cmake.org/)
+- CPLEX >=12.8 [(more info)](https://www.ibm.com/products/ilog-cplex-optimization-studio)
+- Boost Graph Library >=1.66 [(more info)](https://www.boost.org/doc/libs/1_66_0/libs/graph/doc/index.html)
+- CMake >=2.8.4 [(more info)](https://cmake.org/)
 - C++14 or higher [(more info)](https://es.wikipedia.org/wiki/C%2B%2B14)
 
 ### Compiling GOC
