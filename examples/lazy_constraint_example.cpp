@@ -126,6 +126,5 @@ int main()
 		}
 		clog << " 0" << endl;
 	}
-	cout << execution_log << endl;
 	return 0;
 }

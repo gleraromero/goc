@@ -133,6 +133,5 @@ int main()
 		for (int v: V) for (int j: C) if (epsilon_equal(z_star[x[v][j]], 1.0)) clog << j << " ";
 		clog << endl;
 	}
-	cout << execution_log << endl;
 	return 0;
 }

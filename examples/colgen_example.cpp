@@ -137,6 +137,5 @@ int main()
 				clog << I[i] << ": " << execution_log.incumbent->at(y[i]) << endl;
 				
 	}
-	cout << execution_log << endl;
 	return 0;
 }

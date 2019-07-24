@@ -54,6 +54,5 @@ int main()
 		Valuation& x_star = execution_log.best_int_solution;
 		for (int i = 0; i < n; ++i) clog << "Take " << x_star[x[i]] << " of item " << i << endl;
 	}
-	cout << execution_log << endl;
 	return 0;
 }
