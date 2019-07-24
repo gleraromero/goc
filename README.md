@@ -6,24 +6,15 @@ Some common tasks are done in many algorithms for solving Combinatorial Optimiza
 
 GOC is a C++ library that comes with classes and functions to ease the process of writing code for MILP. Its main contributions are the following:
 - Abstraction from a specific MILP Solver by definitions of model and solver interfaces.
-  - Formulation, Expression, Constraint, Variable and Valuation classes.
-  - LPSolver, BCSolver, CGSolver, CutStrategy, SeparationRoutine interfaces.
-  - Implementation of LPSolver and BCSolver interfaces for CPLEX 12.9.
-  - Column generation implementation.
 - Standardization of the output of solvers and compatibility with [Kaleidoscope](https://github.com/gleraromero/kaleidoscope) formats.
 - Some collection util functions such as printing and JSON serialization functions for STDLIB.
-  - New Matrix collection.
 - Graph and Digraph classes, designed for a trade-off between performance and cleanness of code.
-  - Path finding algorithms (dijkstra, bellman ford, floyd).
-  - Max-flow Min-Cut algorithm using the [Boost Graph Library](https://www.boost.org/doc/libs/1_66_0/libs/graph/doc/index.html).
-- Math related objects: Interval, Linear Function, Piecewise Linear Function, Point2D.
-  - epsilon-comparison functions (to see if two values are near given a certain precision).
-- String util functions
-  - contains, split, trim, ...
-  - STR(obj) macro which converts any object to a string using the \<\<operator()
-- Time handling functions and classes
-  - Date, Duration, PointInTime.
-  - Stopwatch, Watch, Timer.
+- Math related objects: Interval, Linear Function, Piecewise Linear Function, Point2D, etc.
+- String resources.
+- Time handling functions and classes.
+
+## Documentation
+To view the full documentation of the library visit the [Wiki](wiki).
 
 ## Getting started
 The following instructions will guide you through the steps to have GOC compiled and ready to use.
@@ -78,6 +69,7 @@ We include a series of examples on the usage of the different solvers with their
 
 ## Built With
 * [JSON for Modern C++](https://github.com/nlohmann/json)
+* [Boost Graph Library](https://www.boost.org/doc/libs/1_66_0/libs/graph/doc/index.html)
 
 ## Authors
 Gonzalo Lera-Romero
