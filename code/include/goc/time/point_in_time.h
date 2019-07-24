@@ -17,8 +17,6 @@ namespace goc
 class PointInTime : public Printable
 {
 public:
-	PointInTime();
-	
 	PointInTime(const Date& date, int hour, int minute, int second);
 	
 	const goc::Date& Date() const;
@@ -28,8 +26,6 @@ public:
 	int Minute() const;
 	
 	int Second() const;
-	
-	int Millisecond() const;
 	
 	// Prints the point in time to the os stream.
 	// Format: date hour:minute:seconds.

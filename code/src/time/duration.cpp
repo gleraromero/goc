@@ -15,12 +15,12 @@ namespace goc
 {
 Duration Duration::None()
 {
-	return Duration(0, DurationUnit::Seconds);
+	return 0.0_sec;
 }
 
 Duration Duration::Max()
 {
-	return Duration(1000, DurationUnit::Hours);
+	return 1000.0_hr;
 }
 
 Duration::Duration()
@@ -133,11 +133,36 @@ double Duration::ConvertToMilliseconds(double duration, DurationUnit from_unit) 
 	return -1;
 }
 
+Duration operator "" _ms(long double time)
+{
+	return Duration(time, DurationUnit::Milliseconds);
+}
+
+Duration operator "" _sec(long double time)
+{
+	return Duration(time, DurationUnit::Seconds);
+}
+
+Duration operator "" _min(long double time)
+{
+	return Duration(time, DurationUnit::Minutes);
+}
+
+Duration operator "" _hr(long double time)
+{
+	return Duration(time, DurationUnit::Hours);
+}
+
 void to_json(json& j, const Duration& d)
 {
 	json x = {};
 	x["number"] = d.Amount(DurationUnit::Seconds);
 	j = x["number"];
+}
+
+void from_json(const nlohmann::json& j, Duration& d)
+{
+	d = Duration(j, DurationUnit::Seconds);
 }
 
 } // namespace goc

@@ -10,11 +10,6 @@
 
 namespace goc
 {
-PointInTime::PointInTime()
-{
-
-}
-
 PointInTime::PointInTime(const class Date& date, int hour, int minute, int second) : date_(date)
 {
 	if (hour < 0 || hour > 23) fail("The hour must be between 0 and 23");

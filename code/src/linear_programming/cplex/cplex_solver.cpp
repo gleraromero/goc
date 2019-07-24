@@ -547,7 +547,7 @@ BCExecutionLog solve_bc(CplexFormulation* formulation, ostream* screen_output, D
 	if (includes(options, BCOption::CutInformation))
 	{
 		if (!execution_log.cut_count.IsSet()) execution_log.cut_count = 0;
-		if (!execution_log.cut_time.IsSet()) execution_log.cut_time = Duration(0, DurationUnit::Seconds);
+		if (!execution_log.cut_time.IsSet()) execution_log.cut_time = 0.0_sec;
 		if (!execution_log.cut_families.IsSet()) execution_log.cut_families.Set({});
 		if (!execution_log.cut_family_cut_count.IsSet()) execution_log.cut_family_cut_count.Set({});
 		if (!execution_log.cut_family_iteration_count.IsSet()) execution_log.cut_family_iteration_count.Set({});

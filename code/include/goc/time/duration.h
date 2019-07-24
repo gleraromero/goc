@@ -14,10 +14,8 @@
 
 namespace goc
 {
-enum class DurationUnit
-{
-	Milliseconds, Seconds, Minutes, Hours
-};
+// Units to measure duration in terms of time.
+enum class DurationUnit { Milliseconds, Seconds, Minutes, Hours };
 
 // Represents a time span (e.g. 2 minutes, 100 milliseconds).
 class Duration : public Printable
@@ -74,9 +72,25 @@ private:
 	double amount_in_ms_; // the duration amount in milliseconds.
 };
 
+// Operator to create a duration in milliseconds.
+Duration operator "" _ms(long double);
+
+// Operator to create a duration in seconds.
+Duration operator "" _sec(long double);
+
+// Operator to create a duration in minutes.
+Duration operator "" _min(long double);
+
+// Operator to create a duration in hours.
+Duration operator "" _hr(long double);
+
 // Serialize duration.
 // Format: 	amount_in_secs.
 void to_json(nlohmann::json& j, const Duration& d);
+
+// Parse duration.
+// Format: amount_in_secs.
+void from_json(const nlohmann::json& j, Duration& d);
 } // namespace goc
 
 namespace std

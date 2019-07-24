@@ -100,7 +100,7 @@ int main()
 
 	// Solve formulation.
 	BCSolver solver;
-	solver.time_limit = Duration(2, DurationUnit::Hours);
+	solver.time_limit = 2_hr;
 	solver.screen_output = &clog;
 	solver.config = {{"CPX_PARAM_CUTSFACTOR", 0}}; // Disable CPLEX cuts.
 	

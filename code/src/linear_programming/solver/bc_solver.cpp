@@ -17,7 +17,7 @@ namespace goc
 {
 BCSolver::BCSolver()
 {
-	time_limit = Duration(2, DurationUnit::Hours);
+	time_limit = Duration::Max();
 	config = {};
 	screen_output = nullptr;
 }

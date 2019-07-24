@@ -12,6 +12,7 @@
 namespace goc
 {
 // Represents a device to measure how much time passed in an interval.
+// - Uses CPP chrono steady clock.
 class Stopwatch
 {
 public:

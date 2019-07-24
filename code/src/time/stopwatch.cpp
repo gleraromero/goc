@@ -12,7 +12,7 @@ namespace goc
 {
 Stopwatch::Stopwatch(bool started)
 {
-	partial_ = Duration(0, DurationUnit::Milliseconds);
+	partial_ = 0.0_ms;
 	is_paused_ = !started;
 	if (!is_paused_)
 	{
@@ -48,7 +48,7 @@ Duration Stopwatch::Resume()
 void Stopwatch::Reset()
 {
 	is_paused_ = true;
-	partial_ = Duration(0.0, DurationUnit::Milliseconds);
+	partial_ = 0.0_ms;
 }
 
 Duration Stopwatch::Peek() const

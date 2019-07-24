@@ -108,7 +108,7 @@ int main()
 	for (int i = 0; i < n; ++i) add_independent_set(n, rmp, create_bitset<MAX_N>({i}), &y, &I); // Add the trivial independent sets.
 	CGSolver cg_solver;
 	LPSolver lp_solver;
-	cg_solver.time_limit = Duration(2, DurationUnit::Hours);
+	cg_solver.time_limit = 2.0_hr;
 	cg_solver.screen_output = &clog;
 	cg_solver.lp_solver = &lp_solver;
 	cg_solver.pricing_function = [&] (const vector<double>& duals, double incumbent_value, Duration time_limit,

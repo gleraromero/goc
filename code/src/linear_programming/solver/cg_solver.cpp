@@ -24,7 +24,7 @@ LPSolver default_lp_solver;
 CGSolver::CGSolver()
 {
 	// Set default values.
-	time_limit = Duration(2, DurationUnit::Hours);
+	time_limit = Duration::Max();
 	lp_solver = &default_lp_solver;
 	screen_output = nullptr;
 }

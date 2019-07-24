@@ -42,8 +42,8 @@ CGExecutionLog solve_colgen(Formulation* formulation,
 	
 	// Keep track of the execution.
 	CGExecutionLog execution_log;
-	if (!execution_log.lp_time.IsSet()) execution_log.lp_time = Duration(0, DurationUnit::Seconds);
-	if (!execution_log.pricing_time.IsSet()) execution_log.pricing_time = Duration(0, DurationUnit::Seconds);
+	if (!execution_log.lp_time.IsSet()) execution_log.lp_time = 0.0_sec;
+	if (!execution_log.pricing_time.IsSet()) execution_log.pricing_time = 0.0_sec;
 	if (!execution_log.iterations.IsSet()) execution_log.iterations = vector<json>{};
 	if (!execution_log.iteration_count.IsSet()) execution_log.iteration_count = 0;
 	

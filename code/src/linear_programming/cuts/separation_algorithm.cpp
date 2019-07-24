@@ -28,7 +28,7 @@ SeparationAlgorithm::SeparationAlgorithm(const SeparationStrategy& separation_st
 	for (auto& family: families_ordered_by_dependencies_)
 	{
 		cuts_added_[family] = iteration_count_[family] = 0;
-		separation_time_[family] = Duration(0, DurationUnit::Seconds);
+		separation_time_[family] = 0.0_sec;
 	}
 }
 

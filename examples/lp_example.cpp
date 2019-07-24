@@ -41,7 +41,7 @@ int main()
 	
 	// Solve formulation.
 	LPSolver solver;
-	solver.time_limit = Duration(2, DurationUnit::Hours);
+	solver.time_limit = 2.0_hr;
 	solver.screen_output = &clog;
 	clog << "Solving LP" << endl;
 	auto execution_log = solver.Solve(f, {LPOption::ScreenOutput, LPOption::Incumbent, LPOption::Duals});
