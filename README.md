@@ -61,11 +61,20 @@ The following instructions will guide you through the steps to have GOC compiled
 
 ## Examples
 We include a series of examples on the usage of the different solvers with their different options. The examples include:
-- [Fractional Knapsack](pages/fractional-knapsack): Example of solving the fractional knapsack using a Linear Programming solver.
-- [0-1 Knapsack](pages/0-1-knapsack): Example of solving the 0-1 knapsack using a Branch a Bound solver.
-- [Traveling Salesman Problem](pages/tsp): Example of solving the TSP using a branch and bound solver with lazy constraints.
-- [Vertex Coloring Problem (BC)](pages/coloring-bc): Example of solving the vertex coloring problem using a branch and cut algorithm.
-- [Vertex Coloring Problem (CG)](pages/coloring-cg): Example of an algorithm to get a lower bound on the chromatic number of a graph using column generation.
+- **Fractional Knapsack**: Example of solving the fractional knapsack using a Linear Programming solver.
+- **0-1 Knapsack**: Example of solving the 0-1 knapsack using a Branch a Bound solver.
+- **Traveling Salesman Problem**: Example of solving the TSP using a branch and bound solver with lazy constraints.
+- **Vertex Coloring Problem (BC)**: Example of solving the vertex coloring problem using a branch and cut algorithm.
+- **Vertex Coloring Problem (CG)**: Example of an algorithm to get a lower bound on the chromatic number of a graph using column generation.
+
+### Running examples
+1. Download GOC repository.
+1. Add two environment variables to bash with CPLEX include and library paths.
+    1. ```export CPLEX_INCLUDE=<path_to_cplex_include_dir>```
+    1. ```export CPLEX_BIN=<path_to_cplex_lib_binary_file>```
+1. Run ```cmake .``` on the root directory.
+1. Run ```make```.
+1. Run the example executable.
 
 ## Built With
 * [JSON for Modern C++](https://github.com/nlohmann/json)
