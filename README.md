@@ -14,7 +14,7 @@ GOC is a C++ library that comes with classes and functions to ease the process o
 - Time handling functions and classes.
 
 ## Documentation
-To view the full documentation of the library visit the [Wiki](wiki).
+To view the full documentation of the library visit the [Wiki](https://github.com/gleraromero/goc/wiki).
 
 ## Getting started
 The following instructions will guide you through the steps to have GOC compiled and ready to use.
