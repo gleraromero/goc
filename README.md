@@ -71,7 +71,14 @@ We include a series of examples on the usage of the different solvers with their
 1. Download GOC repository.
 1. Add two environment variables to bash with CPLEX include and library paths.
     1. ```export CPLEX_INCLUDE=<path_to_cplex_include_dir>```
+        - Usually on Linux: _/opt/ibm/ILOG/CPLEX_Studio\<VERSION\>/cplex/include_
     1. ```export CPLEX_BIN=<path_to_cplex_lib_binary_file>```
+        - Usually on Linux: _/opt/ibm/ILOG/CPLEX_Studio\<VERSION\>/cplex/lib/x86-64_linux/static_pic/libcplex.a_
+1. Add two environment variables to bash with BOOST Graph Library include and library paths.
+    1. ```export BOOST_INCLUDE=<path_to_boost_include_dir>```
+        - Usually on Linux: _/usr/include_
+    1. ```export BOOST_BIN=<path_to_boost_lib_binary_file>```
+        - Usually on Linux: _/usr/lib/x86_64-linux-gnu/libboost_graph.a_
 1. Run ```cmake .``` on the root directory.
 1. Run ```make```.
 1. Run the example executable.
