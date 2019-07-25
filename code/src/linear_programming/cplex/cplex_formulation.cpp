@@ -39,7 +39,7 @@ CplexRow constraint_to_cplex_row(const Constraint& constraint)
 	row.nzcnt = constraint.LeftSide().NonZeroVariableTermCount();
 	row.rhs = constraint.RightSide();
 	row.sense = cplex_senses[constraint.Sense()];
-	row.rmatbeg = {0};
+	row.rmatbeg.push_back(0);
 	row.nzind = 0;
 	for (auto& term: constraint.LeftSide().Terms())
 	{

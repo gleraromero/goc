@@ -57,6 +57,7 @@ unordered_map<Variable, double>::const_iterator Valuation::end() const
 
 void to_json(json& j, const Valuation& v)
 {
+	j = map<string, double>();
 	for (auto& variable_value: v) j[variable_value.first.name] = variable_value.second;
 }
 } // namespace goc

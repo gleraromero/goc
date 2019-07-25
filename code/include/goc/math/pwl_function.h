@@ -57,6 +57,10 @@ public:
 	// Precondition: !Empty().
 	const LinearFunction& LastPiece() const;
 	
+	// Returns: the last piece index that includes x in its domain.
+	// Precondition: x \in dom(p) for any piece p.
+	int PieceIncluding(double x) const;
+	
 	// Returns: the smallest interval [m, M] that includes all pieces domains.
 	// Observation: if Empty() then returns [INFTY, -INFTY].
 	Interval Domain() const;
@@ -68,6 +72,10 @@ public:
 	// Returns: the evaluation of the piece that includes x in its domain.
 	// Exception: if no piece includes x in its domain, it throws an exception.
 	double Value(double x) const;
+	
+	// Returns: the evaluation of the piece that includes x in its domain.
+	// Exception: if no piece includes x in its domain, it throws an exception.
+	double operator()(double x) const;
 	
 	// Returns: the last x such that f(x) = y. Notice that if the function is not bijective it may contain multiple
 	// x such that f(x) = y.

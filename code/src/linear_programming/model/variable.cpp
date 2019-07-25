@@ -10,6 +10,9 @@ using namespace std;
 
 namespace goc
 {
+Variable::Variable() : index_(nullptr)
+{ }
+
 int Variable::Index() const
 {
 	return index_ == nullptr ? -1 : *index_;

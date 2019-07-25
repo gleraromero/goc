@@ -22,7 +22,7 @@ public:
 	std::string name; // name of the variable.
 	
 	// Default constructor.
-	Variable() = default;
+	Variable();
 	
 	// Returns: the index of the variable in the model (i.e. column index).
 	// Observation: It can change if some variables are deleted.

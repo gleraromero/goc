@@ -29,6 +29,11 @@ double LinearFunction::Value(double x) const
 	return slope * x + intercept;
 }
 
+double LinearFunction::operator()(double x) const
+{
+	return Value(x);
+}
+
 double LinearFunction::PreValue(double y) const
 {
 	if (epsilon_equal(slope, 0.0))
@@ -78,8 +83,8 @@ void from_json(const json& j, LinearFunction& f)
 
 void to_json(json& j, const LinearFunction& f)
 {
-	j = vector<vector<Point2D>>(2);
-	j[0].push_back(Point2D(f.domain.left, f.Value(f.domain.left)));
-	j[1].push_back(Point2D(f.domain.right, f.Value(f.domain.right)));
+	j = vector<Point2D>();
+	j.push_back(Point2D(f.domain.left, f.Value(f.domain.left)));
+	j.push_back(Point2D(f.domain.right, f.Value(f.domain.right)));
 }
 } // namespace goc

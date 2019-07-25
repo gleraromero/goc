@@ -36,6 +36,10 @@ public:
 	// Precondition: x \in domain.
 	double Value(double x) const;
 	
+	// Returns: the value of the function f(x).
+	// Precondition: x \in domain.
+	double operator()(double x) const;
+	
 	// Returns: the last x such that f(x) = y.
 	// Observation: if slope == 0 the function is not inversible therefore many f(x) = y might exist.
 	// Precondition: y \in image.

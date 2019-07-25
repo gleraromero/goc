@@ -55,7 +55,7 @@ public:
 	// Solves the formulation using a column generation procedure.
 	// Returns: the execution log with the specified options.
 	// Precondition: the formulation must have been created with the NewFormulation() method.
-	CGExecutionLog Solve(Formulation* formulation, const std::unordered_set<CGOption>& options) const;
+	CGExecutionLog Solve(Formulation* formulation, const std::unordered_set<CGOption>& options={}) const;
 	
 	// Returns: a formulation compatible with the solver.
 	static Formulation* NewFormulation();

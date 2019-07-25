@@ -24,6 +24,11 @@ Expression::Expression() : Expression(0.0)
 Expression::Expression(double scalar) : scalar_(scalar)
 { }
 
+Expression::Expression(const Variable& v) : Expression()
+{
+	SetVariableCoefficient(v, 1.0);
+}
+
 void Expression::operator+=(const Expression& e)
 {
 	scalar_ += e.scalar_;
@@ -191,7 +196,7 @@ void Expression::Print(ostream& os) const
 		if (!is_first) os << " + ";
 		is_first = false;
 		if (epsilon_equal(variable_coefficient.second, 1.0)) os << variable_coefficient.first;
-		else os << variable_coefficient.second << variable_coefficient.first;
+		else os << variable_coefficient.second << " " << variable_coefficient.first;
 	}
 	if (epsilon_different(scalar_, 0.0)) os << " + " << scalar_;
 }
@@ -203,8 +208,23 @@ Expression operator*(double scalar, const Variable& v)
 	return e;
 }
 
+Expression operator+(const Variable& v, const Expression& e)
+{
+	return e + v;
+}
+
+Expression operator-(const Variable& v, const Expression& e)
+{
+	return v + e * -1;
+}
+
 Expression operator+(const Variable& v1, const Variable& v2)
 {
 	return 1.0*v1+1.0*v2;
+}
+
+Expression operator-(const Variable& v1, const Variable& v2)
+{
+	return 1.0*v1-1.0*v2;
 }
 } // namespace goc

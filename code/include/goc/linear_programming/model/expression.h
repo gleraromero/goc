@@ -34,6 +34,9 @@ public:
 	// Creates an expression representing the scalar from the parameter.
 	Expression(double scalar);
 	
+	// Creates an expression representing 1.0 * v.
+	Expression(const Variable& v);
+	
 	// Adds the expression e to this expression.
 	void operator+=(const Expression& e);
 	
@@ -120,8 +123,17 @@ private:
 // Returns: a new expression representing scalar * v.
 Expression operator*(double scalar, const Variable& v);
 
+// Returns: a new expression representing 1.0 * v + e.
+Expression operator+(const Variable& v, const Expression& e);
+
+// Returns: a new expression representing 1.0 * v - e.
+Expression operator-(const Variable& v, const Expression& e);
+
 // Returns: a new expression representing 1.0 * v1 + 1.0 * v2.
 Expression operator+(const Variable& v1, const Variable& v2);
+
+// Returns: a new expression representing 1.0 * v1 - 1.0 * v2.
+Expression operator-(const Variable& v1, const Variable& v2);
 } // namespace goc
 
 #endif //GOC_LINEAR_PROGRAMMING_MODEL_EXPRESSION_H

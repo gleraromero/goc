@@ -84,6 +84,25 @@ const LinearFunction& PWLFunction::LastPiece() const
 	return pieces_.back();
 }
 
+int PWLFunction::PieceIncluding(double x) const
+{
+	// if x is outside the Domain(), throw exception.
+	if (epsilon_bigger(domain_.left, x) || epsilon_smaller(domain_.right, x))
+	{
+		fail("PWLFunction::Value(" + STR(x) +") failed, becuase domain is " + STR(Domain()));
+		return -1;
+	}
+	
+	// Look for a piece that include x in their domain.
+	for (int i = pieces_.size()-1; i >= 0; --i)
+		if (pieces_[i].domain.Includes(x))
+			return i;
+	
+	// The function is not continuous and x is not in the domain of any piece.
+	fail("PWLFunction::Value(" + STR(x) +") failed, becuase x is not inside the domain of its pieces.");
+	return -1;
+}
+
 Interval PWLFunction::Domain() const
 {
 	return domain_;
@@ -111,6 +130,11 @@ double PWLFunction::Value(double x) const
 	// The function is not continuous and x is not in the domain of any piece.
 	fail("PWLFunction::Value(" + STR(x) +") failed, becuase x is not inside the domain of its pieces.");
 	return -1;
+}
+
+double PWLFunction::operator()(double x) const
+{
+	return Value(x);
 }
 
 double PWLFunction::PreValue(double y) const

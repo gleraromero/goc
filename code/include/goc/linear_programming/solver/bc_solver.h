@@ -61,7 +61,7 @@ public:
 	// Solves the formulation.
 	// Returns: the execution log with the specified options.
 	// Precondition: the formulation must have been created with the NewFormulation() method.
-	BCExecutionLog Solve(Formulation* formulation, const std::unordered_set<BCOption>& options) const;
+	BCExecutionLog Solve(Formulation* formulation, const std::unordered_set<BCOption>& options={}) const;
 	
 	// Returns: a formulation compatible with the solver.
 	static Formulation* NewFormulation();

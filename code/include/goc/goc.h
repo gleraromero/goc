@@ -67,4 +67,7 @@
 #include "goc/time/stopwatch.h"
 #include "goc/time/watch.h"
 
+#include "goc/vrp/route.h"
+#include "goc/vrp/vrp_solution.h"
+
 #endif // GOC_GOC_H
