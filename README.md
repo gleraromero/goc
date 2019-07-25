@@ -31,10 +31,14 @@ The following instructions will guide you through the steps to have GOC compiled
 1. Download the [code](code) folder.
 1. Add two environment variables to bash with CPLEX include and library paths.
     1. ```export CPLEX_INCLUDE=<path_to_cplex_include_dir>```
+        - Usually on Linux: _/opt/ibm/ILOG/CPLEX_Studio\<VERSION\>/cplex/include_
     1. ```export CPLEX_BIN=<path_to_cplex_lib_binary_file>```
-1. Add two environment variables to bash with BOOST include and library paths.
+        - Usually on Linux: _/opt/ibm/ILOG/CPLEX_Studio\<VERSION\>/cplex/lib/x86-64_linux/static_pic/libcplex.a_
+1. Add two environment variables to bash with BOOST Graph Library include and library paths.
     1. ```export BOOST_INCLUDE=<path_to_boost_include_dir>```
+        - Usually on Linux: _/usr/include_
     1. ```export BOOST_BIN=<path_to_boost_lib_binary_file>```
+        - Usually on Linux: _/usr/lib/x86_64-linux-gnu/libboost_graph.a_
 1. Run: ```cmake .```
 1. Run ```make```
 1. A compiled library file __libgoc.a__ should be generated.
