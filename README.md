@@ -30,6 +30,9 @@ The following instructions will guide you through the steps to have GOC compiled
 1. Add two environment variables to bash with CPLEX include and library paths.
     1. ```export CPLEX_INCLUDE=<path_to_cplex_include_dir>```
     1. ```export CPLEX_BIN=<path_to_cplex_lib_binary_file>```
+1. Add two environment variables to bash with BOOST include and library paths.
+    1. ```export BOOST_INCLUDE=<path_to_boost_include_dir>```
+    1. ```export BOOST_BIN=<path_to_boost_lib_binary_file>```
 1. Run: ```cmake .```
 1. Run ```make```
 1. A compiled library file __libgoc.a__ should be generated.
