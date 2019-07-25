@@ -22,7 +22,9 @@ The following instructions will guide you through the steps to have GOC compiled
 ### Prerequisites
 - CPLEX >=12.8 [(more info)](https://www.ibm.com/products/ilog-cplex-optimization-studio)
 - Boost Graph Library >=1.66 [(more info)](https://www.boost.org/doc/libs/1_66_0/libs/graph/doc/index.html)
+    - On Linux: ```sudo apt-get install libboost-all-dev```
 - CMake >=2.8.4 [(more info)](https://cmake.org/)
+    - On Linux: ```sudo apt-get install cmake```
 - C++14 or higher [(more info)](https://es.wikipedia.org/wiki/C%2B%2B14)
 
 ### Compiling GOC
