@@ -45,8 +45,6 @@ The following instructions will guide you through the steps to have GOC compiled
 
 > Note: the environment variables can be added permanently by adding those lines to the /etc/environment file.
 
-> Note: CPLEX usually has its root at _/opt/ibm/ILOG/CPLEX_Studio\<version\>/cplex/_.
-
 ### Including GOC in your project (using CMake).
 1. Add a _lib/goc/_ directory to your project.
 1. Copy the _include_ folder of GOC to the _lib/goc_ directory.
