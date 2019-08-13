@@ -12,6 +12,7 @@
 #include "goc/collection/bitset_utils.h"
 #include "goc/collection/collection_utils.h"
 #include "goc/collection/matrix.h"
+#include "goc/collection/vector_map.h"
 
 #include "goc/debug/debug_utils.h"
 
