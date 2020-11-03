@@ -42,10 +42,10 @@ CGExecutionLog solve_colgen(Formulation* formulation,
 	
 	// Keep track of the execution.
 	CGExecutionLog execution_log;
-	if (!execution_log.lp_time.IsSet()) execution_log.lp_time = 0.0_sec;
-	if (!execution_log.pricing_time.IsSet()) execution_log.pricing_time = 0.0_sec;
-	if (!execution_log.iterations.IsSet()) execution_log.iterations = vector<json>{};
-	if (!execution_log.iteration_count.IsSet()) execution_log.iteration_count = 0;
+	execution_log.lp_time = 0.0_sec;
+	execution_log.pricing_time = 0.0_sec;
+	execution_log.iterations = vector<json>{};
+	execution_log.iteration_count = 0;
 	
 	execution_log.status = CGStatus::Optimum;
 	
@@ -57,17 +57,18 @@ CGExecutionLog solve_colgen(Formulation* formulation,
 	int row_count = -1;
 	output.WriteHeader();
 	double objective_value = 0.0;
-	while (variable_count < formulation->VariableCount() || row_count < formulation->ConstraintCount())
+	bool keep_iterating = true;
+	while (keep_iterating)
 	{
+		keep_iterating = false;
 		// Check if time limit was exceeded.
 		if (rolex.Peek() >= time_limit) {execution_log.status = CGStatus::TimeLimitReached; break; }
 		
 		// Solve LP relaxation to get dual variables.
-		lp_solver->time_limit = time_limit - rolex.Peek();
 		auto lp_log = lp_solver->Solve(formulation, {LPOption::Duals, LPOption::Incumbent});
-		*execution_log.lp_time += *lp_log.time;
+		execution_log.lp_time += lp_log.time;
 		
-		if (*lp_log.status != LPStatus::Optimum) { execution_log.status = parse_lp_status(*lp_log.status); break; }
+		if (lp_log.status != LPStatus::Optimum) { execution_log.status = parse_lp_status(lp_log.status); break; }
 		objective_value = lp_log.incumbent_value;
 		if (output.RegisterAttempt()) output.WriteRow({STR(rolex.Peek()), STR(execution_log.iteration_count++), STR(objective_value), STR(formulation->VariableCount())});
 		
@@ -76,15 +77,17 @@ CGExecutionLog solve_colgen(Formulation* formulation,
 		row_count = formulation->ConstraintCount();
 		
 		// Solve the pricing problem (i.e. add new variables to the formulation).
+		auto pricing_tl = time_limit - rolex.Peek();
+		if (rolex.Peek() >= time_limit) { execution_log.status = CGStatus::TimeLimitReached; break; }
 		Stopwatch pricing_rolex(true);
-		pricing_function(*lp_log.duals, *lp_log.incumbent_value, time_limit - rolex.Peek(), &execution_log);
-		*execution_log.pricing_time += pricing_rolex.Pause();
+		keep_iterating = pricing_function(lp_log.duals, lp_log.incumbent_value, pricing_tl, &execution_log);
+		execution_log.pricing_time += pricing_rolex.Pause();
 	}
 	output.WriteRow({STR(rolex.Peek()), STR(execution_log.iteration_count), STR(objective_value), STR(formulation->VariableCount())});
 	if (screen_output) *screen_output << endl;
 	
 	// If the column generation was solved to optimality, get the actual solution.
-	if (*execution_log.status == CGStatus::Optimum)
+	if (execution_log.status == CGStatus::Optimum)
 	{
 		lp_solver->time_limit = Duration::Max();
 		auto lp_log = lp_solver->Solve(formulation, {LPOption::Incumbent});

@@ -12,7 +12,6 @@
 #include <unordered_map>
 #include <vector>
 
-#include "goc/base/maybe.h"
 #include "goc/lib/json.hpp"
 #include "goc/linear_programming/model/valuation.h"
 #include "goc/log/log.h"
@@ -30,27 +29,27 @@ enum class BCStatus {
 class BCExecutionLog : public Log
 {
 public:
-	Maybe<std::string> screen_output; // output of the algorithm in the screen.
-	Maybe<Duration> time; // total time spent solving the problem.
-	Maybe<BCStatus> status; // the status of the execution.
-	Maybe<int> constraint_count; // number of constraints of the initial formulation.
-	Maybe<int> variable_count; // number of variables of the initial formulation.
-	Maybe<int> nodes_open; // number of open nodes in the BB tree at the end of the execution.
-	Maybe<int> nodes_closed; // number of nodes closed during the BB.
-	Maybe<double> root_lp_value; // objective value of the root node relaxation (after cuts).
-	Maybe<double> root_int_value; // value of the integer solution found at the root node.
-	Maybe<Valuation> root_int_solution; // integer solution found at the root node.
-	Maybe<double> best_bound; // best dual bound found for the problem.
-	Maybe<Valuation> best_int_solution; // best integer solution found.
-	Maybe<double> best_int_value; // value of the best integer solution found.
-	Maybe<int> cut_count; // total number of cuts added.
-	Maybe<Duration> cut_time; // total time spent separating cuts.
-	Maybe<std::vector<std::string>> cut_families; // vector of families considered in the BB algorithm.
-	Maybe<std::unordered_map<std::string, int>> cut_family_cut_count; // number of cuts added per family.
-	Maybe<std::unordered_map<std::string, int>> cut_family_iteration_count; // number of cut iterations done per family.
-	Maybe<std::unordered_map<std::string, Duration>> cut_family_cut_time; // time spent separating cuts per family.
+	std::string screen_output; // output of the algorithm in the screen.
+	Duration time; // total time spent solving the problem.
+	BCStatus status; // the status of the execution.
+	int constraint_count; // number of constraints of the initial formulation.
+	int variable_count; // number of variables of the initial formulation.
+	int nodes_open; // number of open nodes in the BB tree at the end of the execution.
+	int nodes_closed; // number of nodes closed during the BB.
+	double root_lp_value; // objective value of the root node relaxation (after cuts).
+	double root_int_value; // value of the integer solution found at the root node.
+	Valuation root_int_solution; // integer solution found at the root node.
+	double best_bound; // best dual bound found for the problem.
+	Valuation best_int_solution; // best integer solution found.
+	double best_int_value; // value of the best integer solution found.
+	int cut_count; // total number of cuts added.
+	Duration cut_time; // total time spent separating cuts.
+	std::vector<std::string> cut_families; // vector of families considered in the BB algorithm.
+	std::unordered_map<std::string, int> cut_family_cut_count; // number of cuts added per family.
+	std::unordered_map<std::string, int> cut_family_iteration_count; // number of cut iterations done per family.
+	std::unordered_map<std::string, Duration> cut_family_cut_time; // time spent separating cuts per family.
 	
-	BCExecutionLog() = default;
+	BCExecutionLog();
 	
 	virtual nlohmann::json ToJSON() const;
 };

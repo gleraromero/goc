@@ -10,7 +10,6 @@
 #include <iostream>
 #include <string>
 
-#include "goc/base/maybe.h"
 #include "goc/lib/json.hpp"
 #include "goc/log/mlb_execution_log.h"
 #include "goc/log/log.h"
@@ -26,15 +25,14 @@ enum class BLBStatus { DidNotStart, TimeLimitReached, SolutionLimitReached, Fini
 class BLBExecutionLog : public Log
 {
 public:
-	Maybe<BLBStatus> status; // status at the end of the execution.
-	Maybe<Duration> time; // total execution time.
-	Maybe<std::string> screen_output; // output of the algorithm in the screen.
-	Maybe<MLBExecutionLog> forward_log; // log of the forward labeling.
-	Maybe<MLBExecutionLog> backward_log; // log of the backward labeling.
-	Maybe<Duration> merge_time; // time spent merging labels.
-	
-	// init_defaults: if true, then all properties are initialized with their default constructor.
-	BLBExecutionLog(bool init_defaults=false);
+	BLBStatus status; // status at the end of the execution.
+	Duration time; // total execution time.
+	std::string screen_output; // output of the algorithm in the screen.
+	MLBExecutionLog forward_log; // log of the forward labeling.
+	MLBExecutionLog backward_log; // log of the backward labeling.
+	Duration merge_time; // time spent merging labels.
+
+	BLBExecutionLog();
 	
 	// Serialize log.
 	virtual nlohmann::json ToJSON() const;

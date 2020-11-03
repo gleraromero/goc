@@ -14,38 +14,49 @@ using namespace nlohmann;
 
 namespace goc
 {
+BCExecutionLog::BCExecutionLog()
+{
+	screen_output = "";
+	time = 0.0_sec;
+	status = BCStatus::DidNotStart;
+	constraint_count = variable_count = nodes_open = nodes_closed = 0;
+	root_lp_value = root_int_value = best_bound = best_int_value = 0.0;
+	cut_count = 0;
+	cut_time = 0.0_sec;
+}
+
 json BCExecutionLog::ToJSON() const
 {
 	json j;
 	j["kd_type"] = "bc";
-	if (screen_output.IsSet()) j["screen_output"] = screen_output.Value();
-	if (time.IsSet()) j["time"] = time.Value().Amount(DurationUnit::Seconds);
-	if (status.IsSet()) j["status"] = STR(status.Value());
-	if (constraint_count.IsSet()) j["constraint_count"] = constraint_count.Value();
-	if (variable_count.IsSet()) j["variable_count"] = variable_count.Value();
-	if (nodes_open.IsSet()) j["nodes_open"] = nodes_open.Value();
-	if (nodes_closed.IsSet()) j["nodes_closed"] = nodes_closed.Value();
-	if (root_lp_value.IsSet()) j["root_lp_value"] = root_lp_value.Value();
-	if (root_int_solution.IsSet()) j["root_int_solution"] = root_int_solution.Value();
-	if (root_int_value.IsSet()) j["root_int_value"] = root_int_value.Value();
-	if (best_bound.IsSet()) j["best_bound"] = best_bound.Value();
-	if (best_int_solution.IsSet()) j["best_int_solution"] = best_int_solution.Value();
-	if (best_int_value.IsSet()) j["best_int_value"] = best_int_value.Value();
-	if (cut_count.IsSet()) j["cut_count"] = cut_count.Value();
-	if (cut_time.IsSet()) j["cut_time"] = cut_time.Value();
-	if (cut_families.IsSet() && !cut_families->empty())
+	j["screen_output"] = screen_output;
+	j["time"] = time.Amount(DurationUnit::Seconds);
+	j["status"] = STR(status);
+	j["constraint_count"] = constraint_count;
+	j["variable_count"] = variable_count;
+	j["nodes_open"] = nodes_open;
+	j["nodes_closed"] = nodes_closed;
+	j["root_lp_value"] = root_lp_value;
+	j["root_int_solution"] = root_int_solution;
+	j["root_int_value"] = root_int_value;
+	j["best_bound"] = best_bound;
+	j["best_int_solution"] = best_int_solution;
+	j["best_int_value"] = best_int_value;
+	j["cut_count"] = cut_count;
+	j["cut_time"] = cut_time;
+	if (!cut_families.empty())
 	{
 		j["cut_families"] = vector<json>();
-		for (auto& family: cut_families.Value())
+		for (auto& family: cut_families)
 		{
 			json cut_family_json;
 			cut_family_json["name"] = family;
-			if (cut_family_cut_count.IsSet() && includes_key(cut_family_cut_count.Value(), family))
-				cut_family_json["cut_count"] = cut_family_cut_count.Value().at(family);
-			if (cut_family_iteration_count.IsSet() && includes_key(cut_family_iteration_count.Value(), family))
-				cut_family_json["cut_iterations"] = cut_family_iteration_count.Value().at(family);
-			if (cut_family_cut_time.IsSet() && includes_key(cut_family_cut_time.Value(), family))
-				cut_family_json["cut_time"] = cut_family_cut_time.Value().at(family);
+			if (includes_key(cut_family_cut_count, family))
+				cut_family_json["cut_count"] = cut_family_cut_count.at(family);
+			if (includes_key(cut_family_iteration_count, family))
+				cut_family_json["cut_iterations"] = cut_family_iteration_count.at(family);
+			if (includes_key(cut_family_cut_time, family))
+				cut_family_json["cut_time"] = cut_family_cut_time.at(family);
 			j["cut_families"].push_back(cut_family_json);
 		}
 	}

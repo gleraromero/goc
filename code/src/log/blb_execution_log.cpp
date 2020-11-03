@@ -15,27 +15,23 @@ using namespace nlohmann;
 
 namespace goc
 {
-BLBExecutionLog::BLBExecutionLog(bool init_defaults)
+BLBExecutionLog::BLBExecutionLog()
 {
-	if (init_defaults)
-	{
-		status = BLBStatus::DidNotStart;
-		time = merge_time = Duration();
-		screen_output = "";
-		forward_log = backward_log = MLBExecutionLog(true);
-	}
+	status = BLBStatus::DidNotStart;
+	time = merge_time = 0.0_sec;
+	screen_output = "";
 }
 
 json BLBExecutionLog::ToJSON() const
 {
 	json j;
 	j["kd_type"] = "blb"; // ID of the log type.
-	if (screen_output.IsSet()) j["screen_output"] = screen_output.Value();
-	if (time.IsSet()) j["time"] = time.Value();
-	if (status.IsSet()) j["status"] = STR(status.Value());
-	if (forward_log.IsSet()) j["forward"] = forward_log.Value();
-	if (backward_log.IsSet()) j["backward"] = backward_log.Value();
-	if (merge_time.IsSet()) j["merge_time"] = merge_time.Value();
+	j["screen_output"] = screen_output;
+	j["time"] = time;
+	j["status"] = STR(status);
+	j["forward"] = forward_log;
+	j["backward"] = backward_log;
+	j["merge_time"] = merge_time;
 	
 	return j;
 }

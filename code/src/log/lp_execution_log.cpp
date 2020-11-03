@@ -15,20 +15,29 @@ using namespace nlohmann;
 
 namespace goc
 {
+LPExecutionLog::LPExecutionLog()
+{
+	screen_output = "";
+	time = 0.0_sec;
+	status = LPStatus::DidNotStart;
+	simplex_iterations = 0;
+	incumbent_value = 0.0;
+	variable_count = 0;
+}
 
 json LPExecutionLog::ToJSON() const
 {
 	json j;
 	j["kd_type"] = "lp"; // ID of the log type.
-	if (screen_output.IsSet()) j["screen_output"] = screen_output.Value();
-	if (time.IsSet()) j["time"] = time.Value().Amount(DurationUnit::Seconds);
-	if (status.IsSet()) j["status"] = STR(status.Value());
-	if (simplex_iterations.IsSet()) j["simplex_iterations"] = simplex_iterations.Value();
-	if (incumbent.IsSet()) j["incumbent"] = incumbent.Value();
-	if (incumbent_value.IsSet()) j["incumbent_value"] = incumbent_value.Value();
-	if (constraint_count.IsSet()) j["constraint_count"] = constraint_count.Value();
-	if (variable_count.IsSet()) j["variable_count"] = variable_count.Value();
-	if (duals.IsSet()) j["duals"] = duals.Value();
+	j["screen_output"] = screen_output;
+	j["time"] = time.Amount(DurationUnit::Seconds);
+	j["status"] = STR(status);
+	j["simplex_iterations"] = simplex_iterations;
+	j["incumbent"] = incumbent;
+	j["incumbent_value"] = incumbent_value;
+	j["constraint_count"] = constraint_count;
+	j["variable_count"] = variable_count;
+	j["duals"] = duals;
 	return j;
 }
 

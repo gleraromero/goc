@@ -22,36 +22,36 @@ const double INFTY = 10e50;
 inline bool epsilon_equal(double x, double y)
 {
 	return fabs(x - y) < EPS;
-};
+}
 
 // Returns: if x != y with respect to the tolerance EPS.
 inline bool epsilon_different(double x, double y)
 {
 	return fabs(x - y) >= EPS;
-};
+}
 
 // Returns: if x < y with respect to the tolerance EPS.
 inline bool epsilon_smaller(double x, double y)
 {
-	return x + EPS < y;
+	return y - x >= EPS;
 }
 
 // Returns: if x <= y with respect to the tolerance EPS.
 inline bool epsilon_smaller_equal(double x, double y)
 {
-	return x - EPS < y;
+	return y - x > -EPS;
 }
 
 // Returns: if x > y with respect to the tolerance EPS.
 inline bool epsilon_bigger(double x, double y)
 {
-	return x - EPS > y;
+	return x - y >= EPS;
 }
 
 // Returns: if x >= y with respect to the tolerance EPS.
 inline bool epsilon_bigger_equal(double x, double y)
 {
-	return x + EPS > y;
+	return x - y > -EPS;
 }
 
 // Returns: the sum of all numbers in 'numbers'.

@@ -254,9 +254,9 @@ void extract_cplex_mip_execution_info(CplexFormulation* formulation, BCExecution
 	// Correction of the RootLPValue if optimum was found in root node (because callback is not called).
 	if (includes(options, BCOption::RootInformation))
 	{
-		if (*execution_log->nodes_closed == 0 && *execution_log->status == BCStatus::Optimum)
+		if (execution_log->nodes_closed == 0 && execution_log->status == BCStatus::Optimum)
 		{
-			execution_log->root_lp_value = *execution_log->best_bound;
+			execution_log->root_lp_value = execution_log->best_bound;
 		}
 	}
 	
@@ -276,9 +276,6 @@ void extract_cplex_mip_execution_info(CplexFormulation* formulation, BCExecution
 										  "CPLEX SolNPool", "CPLEX LocalImplBD", "CPLEX BQP", "CPLEX RLT", "Benders"};
 		
 		// Check how many cuts of each type were added and add them to the execution log.
-		if (!execution_log->cut_families.IsSet()) execution_log->cut_families.Set({});
-		if (!execution_log->cut_family_cut_count.IsSet()) execution_log->cut_family_cut_count.Set({});
-		if (!execution_log->cut_count.IsSet()) execution_log->cut_count = 0;
 		for (int i = 0; i < cplex_cut_ids.size(); ++i)
 		{
 			int cuts_added = 0;
@@ -287,9 +284,9 @@ void extract_cplex_mip_execution_info(CplexFormulation* formulation, BCExecution
 			if (cuts_added > 0)
 			{
 				string cplex_cut_family_name = cplex_cut_names[i];
-				execution_log->cut_families->push_back(cplex_cut_family_name);
-				execution_log->cut_family_cut_count->insert({cplex_cut_family_name, 0});
-				execution_log->cut_family_cut_count->at(cplex_cut_family_name) = cuts_added;
+				execution_log->cut_families.push_back(cplex_cut_family_name);
+				execution_log->cut_family_cut_count.insert({cplex_cut_family_name, 0});
+				execution_log->cut_family_cut_count.at(cplex_cut_family_name) = cuts_added;
 			}
 		}
 	}
@@ -546,20 +543,14 @@ BCExecutionLog solve_bc(CplexFormulation* formulation, ostream* screen_output, D
 	if (includes(options, BCOption::ScreenOutput)) execution_log.screen_output = log_stream.str();
 	if (includes(options, BCOption::CutInformation))
 	{
-		if (!execution_log.cut_count.IsSet()) execution_log.cut_count = 0;
-		if (!execution_log.cut_time.IsSet()) execution_log.cut_time = 0.0_sec;
-		if (!execution_log.cut_families.IsSet()) execution_log.cut_families.Set({});
-		if (!execution_log.cut_family_cut_count.IsSet()) execution_log.cut_family_cut_count.Set({});
-		if (!execution_log.cut_family_iteration_count.IsSet()) execution_log.cut_family_iteration_count.Set({});
-		if (!execution_log.cut_family_cut_time.IsSet()) execution_log.cut_family_cut_time.Set({});
 		execution_log.cut_count += separation_algorithm.CutsAdded();
-		execution_log.cut_time.Value() += separation_algorithm.SeparationTime();
+		execution_log.cut_time += separation_algorithm.SeparationTime();
 		for (auto& cut_family: separation_algorithm.Strategy().Families())
 		{
-			execution_log.cut_families->push_back(cut_family);
-			execution_log.cut_family_cut_count.Value()[cut_family] = separation_algorithm.CutsAdded(cut_family);
-			execution_log.cut_family_iteration_count.Value()[cut_family] = separation_algorithm.IterationCount(cut_family);
-			execution_log.cut_family_cut_time.Value()[cut_family] = separation_algorithm.SeparationTime(cut_family);
+			execution_log.cut_families.push_back(cut_family);
+			execution_log.cut_family_cut_count[cut_family] = separation_algorithm.CutsAdded(cut_family);
+			execution_log.cut_family_iteration_count[cut_family] = separation_algorithm.IterationCount(cut_family);
+			execution_log.cut_family_cut_time[cut_family] = separation_algorithm.SeparationTime(cut_family);
 		}
 	}
 	

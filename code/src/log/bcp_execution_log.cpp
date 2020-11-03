@@ -11,18 +11,24 @@ using namespace nlohmann;
 
 namespace goc
 {
+BCPExecutionLog::BCPExecutionLog()
+{
+	root_constraint_count = root_variable_count = final_constraint_count = final_variable_count = 0;
+	lp_time = pricing_time = branching_time = 0.0_sec;
+}
+
 json BCPExecutionLog::ToJSON() const
 {
 	json j = BCExecutionLog::ToJSON();
 	j["kd_type"] = "bcp";
-	if (root_constraint_count.IsSet()) j["root_constraint_count"] = root_constraint_count.Value();
-	if (root_variable_count.IsSet()) j["root_variable_count"] = root_variable_count.Value();
-	if (final_constraint_count.IsSet()) j["final_constraint_count"] = final_constraint_count.Value();
-	if (final_variable_count.IsSet()) j["final_variable_count"] = final_variable_count.Value();
-	if (root_log.IsSet()) j["root_log"] = root_log.Value();
-	if (lp_time.IsSet()) j["lp_time"] = lp_time.Value();
-	if (pricing_time.IsSet()) j["pricing_time"] = pricing_time.Value();
-	if (branching_time.IsSet()) j["branching_time"] = branching_time.Value();
+	j["root_constraint_count"] = root_constraint_count;
+	j["root_variable_count"] = root_variable_count;
+	j["final_constraint_count"] = final_constraint_count;
+	j["final_variable_count"] = final_variable_count;
+	j["root_log"] = root_log;
+	j["lp_time"] = lp_time;
+	j["pricing_time"] = pricing_time;
+	j["branching_time"] = branching_time;
 	return j;
 }
 } // namespace goc

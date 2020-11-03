@@ -11,7 +11,6 @@
 #include <string>
 #include <vector>
 
-#include "goc/base/maybe.h"
 #include "goc/lib/json.hpp"
 #include "goc/log/log.h"
 #include "goc/time/duration.h"
@@ -31,26 +30,25 @@ enum class MLBStatus { DidNotStart, TimeLimitReached, ProcessLimitReached, Finis
 class MLBExecutionLog : public Log
 {
 public:
-	Maybe<std::string> screen_output; // output of the algorithm in the screen.
-	Maybe<Duration> time; // total time spent solving the problem.
-	Maybe<MLBStatus> status; // the status of the execution.
-	Maybe<int> enumerated_count; // number of labels enumerated.
-	Maybe<int> extended_count; // number of labels extended.
-	Maybe<int> dominated_count; // number of labels dominated.
-	Maybe<int> corrected_count; // number of labels corrected.
-	Maybe<int> processed_count; // number of labels processed.
-	Maybe<std::vector<int>> count_by_length; // count_by_length[i] indicates how many labels of length i were processed.
-	Maybe<Duration> queuing_time; // time pushing and popping from the queue.
-	Maybe<Duration> enumeration_time; // time spent in the enumeration phase.
-	Maybe<Duration> extension_time; // time spent in the extension phase.
-	Maybe<Duration> domination_time; // time spent in the domination phase.
-	Maybe<Duration> correction_time; // time spent in the correction phase.
-	Maybe<Duration> process_time; // time spent in the process phase.
-	Maybe<Duration> positive_domination_time; // time spent in the domination phase (when the result was DOMINATED).
-	Maybe<Duration> negative_domination_time; // time spent in the domination phase (when the result was NOT DOMINATED).
-	
-	// init_defaults: if true, then all properties are initialized with their default constructor.
-	MLBExecutionLog(bool init_defaults=false);
+	std::string screen_output; // output of the algorithm in the screen.
+	Duration time; // total time spent solving the problem.
+	MLBStatus status; // the status of the execution.
+	int enumerated_count; // number of labels enumerated.
+	int extended_count; // number of labels extended.
+	int dominated_count; // number of labels dominated.
+	int corrected_count; // number of labels corrected.
+	int processed_count; // number of labels processed.
+	int bounded_count; // number of labels bounded.
+	std::vector<int> count_by_length; // count_by_length[i] indicates how many labels of length i were processed.
+	Duration queuing_time; // time pushing and popping from the queue.
+	Duration enumeration_time; // time spent in the enumeration phase.
+	Duration extension_time; // time spent in the extension phase.
+	Duration domination_time; // time spent in the domination phase.
+	Duration correction_time; // time spent in the correction phase.
+	Duration process_time; // time spent in the process phase.
+	Duration bounding_time; // time spent in the bounding phase.
+
+	MLBExecutionLog();
 	
 	// Serialize log.
 	virtual nlohmann::json ToJSON() const;

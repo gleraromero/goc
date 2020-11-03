@@ -13,24 +13,30 @@ using namespace nlohmann;
 
 namespace goc
 {
+CGExecutionLog::CGExecutionLog()
+{
+	screen_output = "";
+	time = 0.0_sec;
+	status = CGStatus::DidNotStart;
+	incumbent_value = 0.0;
+	columns_added = iteration_count = 0;
+	pricing_time = lp_time = 0.0_sec;
+}
+
 json CGExecutionLog::ToJSON() const
 {
 	json j;
-	j["log_type"] = "cg"; // ID of the log type.
-	if (screen_output.IsSet()) j["screen_output"] = screen_output.Value();
-	if (time.IsSet()) j["time"] = time.Value().Amount(DurationUnit::Seconds);
-	if (status.IsSet()) j["status"] = STR(status.Value());
-	if (incumbent.IsSet()) j["incumbent"] = incumbent.Value();
-	if (incumbent_value.IsSet()) j["incumbent_value"] = incumbent_value.Value();
-	if (columns_added.IsSet()) j["columns_added"] = columns_added.Value();
-	if (iteration_count.IsSet()) j["iteration_count"] = iteration_count.Value();
-	if (pricing_time.IsSet()) j["pricing_time"] = pricing_time.Value();
-	if (lp_time.IsSet()) j["lp_time"] = lp_time.Value();
-	if (iterations.IsSet())
-	{
-		j["iterations"] = vector<json>();
-		for (auto& iteration: *iterations) j["iterations"].push_back(iteration);
-	}
+	j["kd_type"] = "cg"; // ID of the log type.
+	j["screen_output"] = screen_output;
+	j["time"] = time.Amount(DurationUnit::Seconds);
+	j["status"] = STR(status);
+	j["incumbent"] = incumbent;
+	j["incumbent_value"] = incumbent_value;
+	j["columns_added"] = columns_added;
+	j["iteration_count"] = iteration_count;
+	j["pricing_time"] = pricing_time;
+	j["lp_time"] = lp_time;
+	j["iterations"] = iterations;
 	
 	return j;
 }

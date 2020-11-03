@@ -11,7 +11,6 @@
 #include <string>
 #include <vector>
 
-#include "goc/base/maybe.h"
 #include "goc/linear_programming/model/valuation.h"
 #include "goc/log/log.h"
 #include "goc/time/duration.h"
@@ -26,17 +25,17 @@ enum class LPStatus { DidNotStart, Infeasible, Unbounded, TimeLimitReached, Memo
 class LPExecutionLog : public Log
 {
 public:
-	Maybe<std::string> screen_output; // output of the algorithm in the screen.
-	Maybe<Duration> time; // total time spent solving the relaxation.
-	Maybe<LPStatus> status; // the status of the execution
-	Maybe<int> simplex_iterations; // number of iterations the simplex algorithm did.
-	Maybe<Valuation> incumbent; // best solution found.
-	Maybe<double> incumbent_value; // value of the best solution found.
-	Maybe<int> variable_count; // number of variables in the lp.
-	Maybe<int> constraint_count; // number of constraints in the lp.
-	Maybe<std::vector<double>> duals; // vector of the dual variables associated to the rows in the solution.
+	std::string screen_output; // output of the algorithm in the screen.
+	Duration time; // total time spent solving the relaxation.
+	LPStatus status; // the status of the execution
+	int simplex_iterations; // number of iterations the simplex algorithm did.
+	Valuation incumbent; // best solution found.
+	double incumbent_value; // value of the best solution found.
+	int variable_count; // number of variables in the lp.
+	int constraint_count; // number of constraints in the lp.
+	std::vector<double> duals; // vector of the dual variables associated to the rows in the solution.
 	
-	LPExecutionLog() = default;
+	LPExecutionLog();
 	
 	// Serialize log.
 	virtual nlohmann::json ToJSON() const;

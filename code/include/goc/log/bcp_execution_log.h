@@ -12,7 +12,6 @@
 #include <unordered_map>
 #include <vector>
 
-#include "goc/base/maybe.h"
 #include "goc/lib/json.hpp"
 #include "goc/linear_programming/model/valuation.h"
 #include "goc/log/bc_execution_log.h"
@@ -25,16 +24,16 @@ namespace goc
 class BCPExecutionLog : public BCExecutionLog
 {
 public:
-	Maybe<int> root_constraint_count; // number of constraints after solving the root node.
-	Maybe<int> root_variable_count; // number of variables after solving the root node.
-	Maybe<int> final_constraint_count; // number of constraints at the end of the execution.
-	Maybe<int> final_variable_count; // number of variables at the end of the execution.
-	Maybe<nlohmann::json> root_log; // log of the root node column generation.
-	Maybe<Duration> lp_time; // time spent solving linear relaxations.
-	Maybe<Duration> pricing_time; // time spent solving pricing problems.
-	Maybe<Duration> branching_time; // time spent branching.
+	int root_constraint_count; // number of constraints after solving the root node.
+	int root_variable_count; // number of variables after solving the root node.
+	int final_constraint_count; // number of constraints at the end of the execution.
+	int final_variable_count; // number of variables at the end of the execution.
+	nlohmann::json root_log; // log of the root node column generation.
+	Duration lp_time; // time spent solving linear relaxations.
+	Duration pricing_time; // time spent solving pricing problems.
+	Duration branching_time; // time spent branching.
 	
-	BCPExecutionLog() = default;
+	BCPExecutionLog();
 	
 	virtual nlohmann::json ToJSON() const;
 };

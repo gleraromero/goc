@@ -11,7 +11,6 @@
 #include <string>
 #include <vector>
 
-#include "goc/base/maybe.h"
 #include "goc/lib/json.hpp"
 #include "goc/linear_programming/model/valuation.h"
 #include "goc/log/log.h"
@@ -27,18 +26,18 @@ enum class CGStatus { DidNotStart, Infeasible, Unbounded, TimeLimitReached, Memo
 class CGExecutionLog : public Log
 {
 public:
-	Maybe<std::string> screen_output; // output of the algorithm in the screen.
-	Maybe<Duration> time; // total time spent solving.
-	Maybe<CGStatus> status; // the status of the execution
-	Maybe<Valuation> incumbent; // best solution found.
-	Maybe<double> incumbent_value; // value of the best solution found.
-	Maybe<int> columns_added; // total number of columns added in the colgen.
-	Maybe<int> iteration_count; // number of pricing iterations solved.
-	Maybe<Duration> pricing_time; // time spent solving the pricing problem.
-	Maybe<Duration> lp_time; // time spent solving the lp relaxation.
-	Maybe<std::vector<nlohmann::json>> iterations; // logs of the pricing iterations.
+	std::string screen_output; // output of the algorithm in the screen.
+	Duration time; // total time spent solving.
+	CGStatus status; // the status of the execution
+	Valuation incumbent; // best solution found.
+	double incumbent_value; // value of the best solution found.
+	int columns_added; // total number of columns added in the colgen.
+	int iteration_count; // number of pricing iterations solved.
+	Duration pricing_time; // time spent solving the pricing problem.
+	Duration lp_time; // time spent solving the lp relaxation.
+	std::vector<nlohmann::json> iterations; // logs of the pricing iterations.
 	
-	CGExecutionLog() = default;
+	CGExecutionLog();
 	
 	// Serialize log.
 	virtual nlohmann::json ToJSON() const;
